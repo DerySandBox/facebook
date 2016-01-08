@@ -12,8 +12,8 @@ and open the template in the editor.
     <body>
         <h1>Hello</h1>
         <?php
-        require_once __DIR__ . '/lib/Facebook/autoload.php';
         session_start();
+        require_once __DIR__ . '/lib/Facebook/autoload.php';
 
         $app_id = '1741551159400431';
         $app_secret = '257bf39896d0a4dd33f6c53fd6dafdec';
