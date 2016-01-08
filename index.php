@@ -12,6 +12,7 @@ and open the template in the editor.
     <body>
         <h1>Hello</h1>
         <?php
+        
         session_start();
         require_once __DIR__ . '/lib/Facebook/autoload.php';
 
@@ -30,7 +31,7 @@ and open the template in the editor.
 
         try {
             $session = $helper->getSessionFromRedirect();
-        echo 3;
+            echo 3;
         } catch (FacebookRequestException $ex) {
             // When Facebook returns an error
         } catch (Exception $ex) {
@@ -49,7 +50,7 @@ and open the template in the editor.
             // print data
             echo print_r($graphObject, 1);
         } else {
-                    echo 5;
+            echo 5;
 
             // show login url
             echo '<a href="' . $helper->getLoginUrl() . '">Login</a>';
