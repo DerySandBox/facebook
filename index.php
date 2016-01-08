@@ -42,9 +42,9 @@ and open the template in the editor.
             if (!isset($accessToken)) {
                 // Need to login first
                 $permissions = ['email', 'user_likes']; // optional
-                echo "a";
-                $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
-                echo "b";
+                echo "abc";
+                $loginUrl = $helper->getLoginUrl('http://zcfb.herokuapp.com/index.php', $permissions);
+                echo "bcd";
 
                 echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
             } else {
