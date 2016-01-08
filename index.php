@@ -43,9 +43,7 @@ and open the template in the editor.
             if (!isset($accessToken)) {
                 // Need to login first
                 $permissions = ['email', 'user_likes']; // optional
-                echo 2;
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
-                echo 3;
 
                 echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
             } else {
@@ -74,7 +72,7 @@ and open the template in the editor.
                 exit;
             }
 
-            echo 'Logged in as ' . $userNode->getName();
+            echo 'Thank you so much for your visit: ' . $userNode->getName();
         }
         ?>        
     </body>
