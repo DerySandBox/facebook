@@ -17,12 +17,12 @@ and open the template in the editor.
 
         $app_id = '1741551159400431';
         $app_secret = '257bf39896d0a4dd33f6c53fd6dafdec';
-        $redirect_url = 'https://zcfb.herokuapp.com/index.php';
+        $redirect_url = 'http://zcfb.herokuapp.com/index.php';
 
         $fb = new Facebook\Facebook([
             'app_id' => $app_id,
             'app_secret' => $app_secret,
-            'default_graph_version' => 'v2.5',
+            'default_graph_version' => 'v2.2',
         ]);
 
         // Get the access token first
@@ -56,7 +56,6 @@ and open the template in the editor.
             }
         }
 
-        echo "1";
         // use the access token to retrieve the facebook data
         if (isset($_SESSION['facebook_access_token'])) {
             $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
