@@ -19,6 +19,7 @@ and open the template in the editor.
         $app_secret = '257bf39896d0a4dd33f6c53fd6dafdec';
         $redirect_url = 'http://zcfb.herokuapp.com/index.php';
 
+        echo 0;
         // init app with app id (APPID) and secret (SECRET)
         FacebookSession::setDefaultApplication($app_id, $app_secret);
 
