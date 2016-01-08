@@ -72,6 +72,7 @@ and open the template in the editor.
             }
 
             echo 'Thank you so much for your visit: ' . $userNode->getName();
+            echo 'Your email is: ' . $userNode->getEmail();
         }
         ?>        
     </body>
