@@ -12,56 +12,70 @@ and open the template in the editor.
     <body>
         <h1>Hello</h1>
         <?php
-        
-        session_start();
         require_once __DIR__ . '/lib/Facebook/autoload.php';
+        session_start();
 
         $app_id = '1741551159400431';
         $app_secret = '257bf39896d0a4dd33f6c53fd6dafdec';
-        $redirect_url = 'http://zcfb.herokuapp.com/index.php';
-
-        echo 0;
-        // init app with app id (APPID) and secret (SECRET)
-        FacebookSession::setDefaultApplication($app_id, $app_secret);
-
-// login helper with redirect_uri
+        $redirect_url = 'https://zcfb.herokuapp.com/';
         echo 1;
-        $helper = new FacebookRedirectLoginHelper($redirect_url);
-        echo 2;
 
-        try {
-            $session = $helper->getSessionFromRedirect();
-            echo 3;
-        } catch (FacebookRequestException $ex) {
-            // When Facebook returns an error
-        } catch (Exception $ex) {
-            // When validation fails or other local issues
+        $fb = new Facebook\Facebook([
+            'app_id' => $app_id,
+            'app_secret' => $app_secret,
+            'default_graph_version' => 'v2.5',
+        ]);
+
+        // Get the access token first
+        if (!isset($_SESSION['facebook_access_token'])) {
+            $helper = $fb->getRedirectLoginHelper();
+            try {
+                $accessToken = $helper->getAccessToken();
+            } catch (Facebook\Exceptions\FacebookResponseException $e) {
+                // When Graph returns an error
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+            } catch (Facebook\Exceptions\FacebookSDKException $e) {
+                // When validation fails or other local issues
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+            }
+            if (!isset($accessToken)) {
+                // Need to login first
+                $permissions = ['email', 'user_likes']; // optional
+                echo 2;
+                $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
+                echo 3;
+
+                echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
+            } else {
+                // Logged in already!
+                $_SESSION['facebook_access_token'] = (string) $accessToken;
+
+                // Now you can redirect to another page and use the
+                // access token from $_SESSION['facebook_access_token']
+            }
         }
 
-// see if we have a session
-        echo 4;
-        if (isset($session)) {
-            // graph api request for user data
-            $request = new FacebookRequest($session, 'GET', '/me');
-            $response = $request->execute();
-            // get response
-            $graphObject = $response->getGraphObject();
+        // use the access token to retrieve the facebook data
+        if (isset($_SESSION['facebook_access_token'])) {
+            $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 
-            // print data
-            echo print_r($graphObject, 1);
-        } else {
-            echo 5;
+            try {
+                $response = $fb->get('/me');
+                $userNode = $response->getGraphUser();
+            } catch (Facebook\Exceptions\FacebookResponseException $e) {
+                // When Graph returns an error
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+            } catch (Facebook\Exceptions\FacebookSDKException $e) {
+                // When validation fails or other local issues
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+            }
 
-            // show login url
-            echo '<a href="' . $helper->getLoginUrl() . '">Login</a>';
+            echo 'Logged in as ' . $userNode->getName();
         }
         ?>        
-
-        <div
-            class="fb-like"
-            data-share="true"
-            data-width="450"
-            data-show-faces="true">
-        </div>
     </body>
 </html>
