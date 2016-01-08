@@ -44,6 +44,8 @@ and open the template in the editor.
                 // Need to login first
                 $permissions = ['email', 'user_likes']; // optional
                 echo 2;
+                $helper->getLoginUrl();
+                echo 2.5;
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
                 echo 3;
 
