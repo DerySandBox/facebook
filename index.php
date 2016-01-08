@@ -41,16 +41,16 @@ and open the template in the editor.
                 echo 'Facebook SDK returned an error: ' . $e->getMessage();
                 exit;
             }
-        echo "1";
+            echo "1";
             if (!isset($accessToken)) {
                 // Need to login first
                 $permissions = ['email', 'user_likes']; // optional
-        echo "a";
+                echo "a";
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
-        echo "b";
+                echo "b";
 
                 echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
-        echo "c";
+                echo "c";
             } else {
                 // Logged in already!
                 $_SESSION['facebook_access_token'] = (string) $accessToken;
@@ -81,5 +81,12 @@ and open the template in the editor.
             echo 'Logged in as ' . $userNode->getName();
         }
         ?>        
+
+        <div
+            class="fb-like"
+            data-share="true"
+            data-width="450"
+            data-show-faces="true">
+        </div>
     </body>
 </html>
