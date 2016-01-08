@@ -15,9 +15,9 @@ and open the template in the editor.
         session_start();
         require_once __DIR__ . '/lib/Facebook/autoload.php';
 
-        $app_id = '1741551159400431';
-        $app_secret = '257bf39896d0a4dd33f6c53fd6dafdec';
-        $redirect_url = 'https://zcfb.herokuapp.com/';
+        $app_id = '1671214739826298';
+        $app_secret = '66c90f2ccd34a07b83a8703756fe84fd';
+        $redirect_url = 'http://zcfb.herokuapp.com/';
         echo 1;
 
         $fb = new Facebook\Facebook([
