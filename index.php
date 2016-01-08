@@ -17,7 +17,7 @@ and open the template in the editor.
 
         $app_id = '1741551159400431';
         $app_secret = '257bf39896d0a4dd33f6c53fd6dafdec';
-        $redirect_url = 'https://zcfb.herokuapp.com/';
+        $redirect_url = 'https://zcfb.herokuapp.com/index.php';
 
         $fb = new Facebook\Facebook([
             'app_id' => $app_id,
@@ -43,17 +43,7 @@ and open the template in the editor.
                 // Need to login first
                 $permissions = ['email', 'user_likes']; // optional
                 echo "a";
-            try {
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
-            } catch (Facebook\Exceptions\FacebookResponseException $e) {
-                // When Graph returns an error
-                echo 'Graph returned an error: ' . $e->getMessage();
-                exit;
-            } catch (Facebook\Exceptions\FacebookSDKException $e) {
-                // When validation fails or other local issues
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                exit;
-            }
                 echo "b";
 
                 echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
