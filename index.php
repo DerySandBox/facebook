@@ -12,6 +12,7 @@ and open the template in the editor.
     <body>
         <h1>Hello</h1>
         <?php
+        echo 0.1;
         session_start();
         require_once( 'Facebook/FacebookSession.php' );
         require_once( 'Facebook/FacebookRedirectLoginHelper.php' );
