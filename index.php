@@ -18,7 +18,6 @@ and open the template in the editor.
         $app_id = '1671214739826298';
         $app_secret = '66c90f2ccd34a07b83a8703756fe84fd';
         $redirect_url = 'http://zcfb.herokuapp.com/';
-        echo 1;
 
         $fb = new Facebook\Facebook([
             'app_id' => $app_id,
