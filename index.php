@@ -12,27 +12,10 @@ and open the template in the editor.
     <body>
         <h1>Hello</h1>
         <?php
-        echo 0.1;
         session_start();
-        require_once( 'Facebook/FacebookSession.php' );
-        require_once( 'Facebook/FacebookRedirectLoginHelper.php' );
-        require_once( 'Facebook/FacebookRequest.php' );
-        require_once( 'Facebook/FacebookResponse.php' );
-        require_once( 'Facebook/FacebookSDKException.php' );
-        require_once( 'Facebook/FacebookRequestException.php' );
-        require_once( 'Facebook/FacebookAuthorizationException.php' );
-        require_once( 'Facebook/GraphObject.php' );
+        require_once __DIR__ . '/lib/Facebook/autoload.php';
 
-        use Facebook\FacebookSession;
-        use Facebook\FacebookRedirectLoginHelper;
-        use Facebook\FacebookRequest;
-        use Facebook\FacebookResponse;
-        use Facebook\FacebookSDKException;
-        use Facebook\FacebookRequestException;
-        use Facebook\FacebookAuthorizationException;
-        use Facebook\GraphObject;
-
-$app_id = '1741551159400431';
+        $app_id = '1741551159400431';
         $app_secret = '257bf39896d0a4dd33f6c53fd6dafdec';
         $redirect_url = 'http://zcfb.herokuapp.com/index.php';
 
@@ -46,7 +29,7 @@ $app_id = '1741551159400431';
 
         try {
             $session = $helper->getSessionFromRedirect();
-            echo 3;
+        echo 3;
         } catch (FacebookRequestException $ex) {
             // When Facebook returns an error
         } catch (Exception $ex) {
@@ -65,7 +48,7 @@ $app_id = '1741551159400431';
             // print data
             echo print_r($graphObject, 1);
         } else {
-            echo 5;
+                    echo 5;
 
             // show login url
             echo '<a href="' . $helper->getLoginUrl() . '">Login</a>';
