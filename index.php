@@ -23,10 +23,13 @@ and open the template in the editor.
         FacebookSession::setDefaultApplication($app_id, $app_secret);
 
 // login helper with redirect_uri
+        echo 1;
         $helper = new FacebookRedirectLoginHelper($redirect_url);
+        echo 2;
 
         try {
             $session = $helper->getSessionFromRedirect();
+        echo 3;
         } catch (FacebookRequestException $ex) {
             // When Facebook returns an error
         } catch (Exception $ex) {
@@ -34,6 +37,7 @@ and open the template in the editor.
         }
 
 // see if we have a session
+        echo 4;
         if (isset($session)) {
             // graph api request for user data
             $request = new FacebookRequest($session, 'GET', '/me');
@@ -44,6 +48,8 @@ and open the template in the editor.
             // print data
             echo print_r($graphObject, 1);
         } else {
+                    echo 5;
+
             // show login url
             echo '<a href="' . $helper->getLoginUrl() . '">Login</a>';
         }
