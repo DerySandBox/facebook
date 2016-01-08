@@ -19,14 +19,12 @@ and open the template in the editor.
         $app_secret = '257bf39896d0a4dd33f6c53fd6dafdec';
         $redirect_url = 'https://zcfb.herokuapp.com/';
 
-        echo "1";
         $fb = new Facebook\Facebook([
             'app_id' => $app_id,
             'app_secret' => $app_secret,
             'default_graph_version' => 'v2.5',
         ]);
 
-        echo "1";
         // Get the access token first
         if (!isset($_SESSION['facebook_access_token'])) {
             $helper = $fb->getRedirectLoginHelper();
@@ -41,16 +39,24 @@ and open the template in the editor.
                 echo 'Facebook SDK returned an error: ' . $e->getMessage();
                 exit;
             }
-            echo "1";
             if (!isset($accessToken)) {
                 // Need to login first
                 $permissions = ['email', 'user_likes']; // optional
                 echo "a";
+            try {
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
+            } catch (Facebook\Exceptions\FacebookResponseException $e) {
+                // When Graph returns an error
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+            } catch (Facebook\Exceptions\FacebookSDKException $e) {
+                // When validation fails or other local issues
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+            }
                 echo "b";
 
                 echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
-                echo "c";
             } else {
                 // Logged in already!
                 $_SESSION['facebook_access_token'] = (string) $accessToken;
