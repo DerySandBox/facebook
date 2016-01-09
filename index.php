@@ -42,7 +42,8 @@ and open the template in the editor.
             if (!isset($accessToken)) {
                 // Need to login first
                 //$permissions = ['email', 'public_profile','user_friends']; // optional
-                $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
+                //$loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
+                $loginUrl = $helper->getLoginUrl($redirect_url);
 
                 echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
             } else {
