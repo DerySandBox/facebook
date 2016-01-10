@@ -34,7 +34,7 @@
 
 
             function putBackground() {
-                var background = new PIXI.Sprite.fromImage("image/Layer.1.Base.png");
+                var background = new PIXI.Sprite.fromImage("img/Layer.1.Base.png");
                 background.position.x = 0;
                 background.position.y = 0;
                 stage.addChild(background);
@@ -42,10 +42,10 @@
 
             function putHouse_fb(x, y) {
                 // create a house container
-                var house = new PIXI.Sprite.fromImage('image/Layer.4.FB.png');
+                var house = new PIXI.Sprite.fromImage('img/Layer.4.FB.png');
 
                 // put the feed to the house
-                var fb_feed = new PIXI.Sprite.fromImage('image/Layer.7.CloudB.png');
+                var fb_feed = new PIXI.Sprite.fromImage('img/Layer.7.CloudB.png');
                 fb_feed.position.x = 50;
                 fb_feed.position.y = 50;
                 house.addChild(fb_feed);
@@ -64,7 +64,7 @@
 
             function putHouse_occupied(x, y) {
                 // create a house container
-                var house = new PIXI.Sprite.fromImage('image/Layer.3.Occupied.png');
+                var house = new PIXI.Sprite.fromImage('img/Layer.3.Occupied.png');
 
                 // put house to stage
                 house.position.x = x;
@@ -74,7 +74,7 @@
 
             function putHouse_grey(x, y) {
                 // create a house container
-                var house = new PIXI.Sprite.fromImage('image/Layer.2.Grey.png');
+                var house = new PIXI.Sprite.fromImage('img/Layer.2.Grey.png');
 
                 // put house to stage
                 house.position.x = x;
