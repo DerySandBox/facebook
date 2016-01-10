@@ -62,7 +62,7 @@ and open the template in the editor.
             $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 
             try {
-                $response = $fb->get('/me');
+                $response = $fb->get('/me?locale=en_US&fields=name,email');
                 $userNode = $response->getGraphUser();
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
                 // When Graph returns an error
