@@ -62,7 +62,7 @@ and open the template in the editor.
             $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 
             try {
-                $response = $fb->get('/me?locale=en_US&fields=name,email');
+                $response = $fb->get('/me?locale=en_US&fields=id,email,name');
                 $userNode = $response->getGraphUser();
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
                 // When Graph returns an error
@@ -73,8 +73,9 @@ and open the template in the editor.
                 echo 'Facebook SDK returned an error: ' . $e->getMessage();
                 exit;
             }
-
-            echo 'Thank you so much for your visit: ' . $userNode->getName();
+            
+            echo '<img src="//graph.facebook.com/'.$userNode->getId().'/picture">';
+            echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
         }
         ?>        
