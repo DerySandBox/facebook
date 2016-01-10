@@ -71,8 +71,7 @@ and open the template in the editor.
                 $response = $fb->get('/me?locale=en_US&fields=id,email,name');
                 $userNode = $response->getGraphUser();
 
-                $response = $fb->get('/me/friendlists?limit=3&offset=0');
-                $friendList = $response;
+                $friendList = $fb->get('/me/friendlists?limit=3&offset=0');
                 
                 
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
