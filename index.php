@@ -67,7 +67,7 @@ and open the template in the editor.
                 $userNode = $response->getGraphUser();
 
                 $response = $fb->get('/me/friendlists?limit=3&offset=0');
-                $friendList = $response->getGraphEdge();
+                $friendList = $response;
                 
                 
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
@@ -84,7 +84,7 @@ and open the template in the editor.
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
             echo '<br/>Your friend list is ';
-            var_dump($friendList);
+            var_dump($response);
             ?>
 
             <script>
