@@ -29,10 +29,7 @@ and open the template in the editor.
         ]);
 
         // Get the access token first
-        if (!empty($_GET('logout'))) {
-            $_SESSION['facebook_access_token'] = ''; 
-        }
-        if (empty($_SESSION['facebook_access_token'])) {
+        if (!isset($_SESSION['facebook_access_token'])) {
             $helper = $fb->getRedirectLoginHelper();
             try {
                 $accessToken = $helper->getAccessToken();
