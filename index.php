@@ -47,7 +47,7 @@ and open the template in the editor.
             }
             if (!isset($accessToken)) {
                 // Need to login first
-                echo '<h2>Getting facebook accesstoken</h2>';
+                echo '<h2>Reuse facebook accesstoken</h2>';
                 $permissions = ['email', 'public_profile', 'user_friends','read_custom_friendlists']; // optional
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
                 //$loginUrl = $helper->getLoginUrl($redirect_url);
@@ -65,7 +65,6 @@ and open the template in the editor.
 
         // use the access token to retrieve the facebook data
         if (isset($_SESSION['facebook_access_token'])) {
-            echo '<h2>Reuse facebook accesstoken</h2>';
             $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 
             try {
