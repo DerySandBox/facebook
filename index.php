@@ -44,7 +44,7 @@ and open the template in the editor.
             }
             if (!isset($accessToken)) {
                 // Need to login first
-                $permissions = ['email', 'public_profile', 'user_friends']; // optional
+                $permissions = ['email', 'public_profile', 'user_friends','read_custom_friendlists']; // optional
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
                 //$loginUrl = $helper->getLoginUrl($redirect_url);
 
@@ -65,6 +65,11 @@ and open the template in the editor.
             try {
                 $response = $fb->get('/me?locale=en_US&fields=id,email,name');
                 $userNode = $response->getGraphUser();
+
+                $response = $fb->get('/me/friendlists?limit=3&offset=0');
+                $friendList = $response->getGraphNode();
+                
+                
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
                 // When Graph returns an error
                 echo 'Graph returned an error: ' . $e->getMessage();
@@ -78,6 +83,8 @@ and open the template in the editor.
             echo '<img src="//graph.facebook.com/' . $userNode->getId() . '/picture">';
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
+            echo '<br/>Your friend list is ';
+            var_dump($friendList);
             ?>
 
             <script>
