@@ -10,6 +10,7 @@ and open the template in the editor.
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>ZenClause</title>
+        <script src="js/pixi.js"></script>
     </head>
     <body>
         <h1>Welcome to ZenClause</h1>
@@ -43,7 +44,7 @@ and open the template in the editor.
             }
             if (!isset($accessToken)) {
                 // Need to login first
-                $permissions = ['email', 'public_profile','user_friends']; // optional
+                $permissions = ['email', 'public_profile', 'user_friends']; // optional
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
                 //$loginUrl = $helper->getLoginUrl($redirect_url);
 
@@ -73,10 +74,91 @@ and open the template in the editor.
                 echo 'Facebook SDK returned an error: ' . $e->getMessage();
                 exit;
             }
-            
-            echo '<img src="//graph.facebook.com/'.$userNode->getId().'/picture">';
+
+            echo '<img src="//graph.facebook.com/' . $userNode->getId() . '/picture">';
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
+            ?>
+
+            <script>
+                var renderer = PIXI.autoDetectRenderer(1331, 548, {backgroundColor: 0x1099bb});
+                document.body.appendChild(renderer.view);
+                var stage = new PIXI.Container();
+
+    // put the background image	
+                putBackground();
+
+                putHouse_grey(-600, -170);
+                putHouse_grey(-400, -200);
+
+                putHouse_occupied(-490, -30);
+
+    // put the houses
+                putHouse_fb(-260, 30);
+                putHouse_fb(-40, -110);
+                putHouse_fb(300, -20);
+
+    // start animating
+                animate();
+
+
+                function putBackground() {
+                    var background = new PIXI.Sprite.fromImage("img/Layer.1.Base.png");
+                    background.position.x = 0;
+                    background.position.y = 0;
+                    stage.addChild(background);
+                }
+
+                function putHouse_fb(x, y) {
+                    // create a house container
+                    var house = new PIXI.Sprite.fromImage('img/Layer.4.FB.png');
+
+                    // put the feed to the house
+                    var fb_feed = new PIXI.Sprite.fromImage('img/Layer.7.CloudB.png');
+                    fb_feed.position.x = 50;
+                    fb_feed.position.y = 50;
+                    house.addChild(fb_feed);
+
+                    // put the text to the feed
+                    var countingText = new PIXI.Text('Hey whats up!', {font: 'bold italic 12px Arvo', fill: 'red'});
+                    countingText.position.x = 660;
+                    countingText.position.y = 195;
+                    fb_feed.addChild(countingText);
+
+                    // put house to stage
+                    house.position.x = x;
+                    house.position.y = y;
+                    stage.addChild(house);
+                }
+
+                function putHouse_occupied(x, y) {
+                    // create a house container
+                    var house = new PIXI.Sprite.fromImage('img/Layer.3.Occupied.png');
+
+                    // put house to stage
+                    house.position.x = x;
+                    house.position.y = y;
+                    stage.addChild(house);
+                }
+
+                function putHouse_grey(x, y) {
+                    // create a house container
+                    var house = new PIXI.Sprite.fromImage('img/Layer.2.Grey.png');
+
+                    // put house to stage
+                    house.position.x = x;
+                    house.position.y = y;
+                    stage.addChild(house);
+                }
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    renderer.render(stage);
+                }
+
+            </script>        
+
+            <?php
         }
         ?>        
     </body>
