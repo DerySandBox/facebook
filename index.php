@@ -45,9 +45,9 @@ and open the template in the editor.
                 echo 'Facebook SDK returned an error: ' . $e->getMessage();
                 exit;
             }
-            if (!isset($accessToken)) {
+            if (!isset($accessToken) || isset($_GET['logout'])) {
                 // Need to login first
-                echo '<h2>Reuse facebook accesstoken</h2>';
+                echo '<h2>Initialize facebook accesstoken</h2>';
                 $permissions = ['email', 'public_profile', 'user_friends','read_custom_friendlists']; // optional
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
                 //$loginUrl = $helper->getLoginUrl($redirect_url);
