@@ -7,10 +7,10 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>ZC with FaceBook</title>
+        <title>ZenClause</title>
     </head>
     <body>
-        <h1>Hello</h1>
+        <h1>Welcome to ZenClause</h1>
         <?php
         session_start();
         require_once __DIR__ . '/lib/Facebook/autoload.php';
@@ -41,11 +41,11 @@ and open the template in the editor.
             }
             if (!isset($accessToken)) {
                 // Need to login first
-                //$permissions = ['email', 'public_profile','user_friends']; // optional
-                //$loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
-                $loginUrl = $helper->getLoginUrl($redirect_url);
+                $permissions = ['email', 'public_profile','user_friends']; // optional
+                $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
+                //$loginUrl = $helper->getLoginUrl($redirect_url);
 
-                echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
+                echo '<a href="' . $loginUrl . '"><img src="img/facebook.png" /></a>';
             } else {
                 // Logged in already!
                 $_SESSION['facebook_access_token'] = (string) $accessToken;
