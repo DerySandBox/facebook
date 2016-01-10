@@ -9,7 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>ZenClause</title>
+        <title>ZenClause Software</title>
         <script src="js/pixi.js"></script>
     </head>
     <body>
