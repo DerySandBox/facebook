@@ -29,7 +29,10 @@ and open the template in the editor.
         ]);
 
         // Get the access token first
-        if (!isset($_SESSION['facebook_access_token'])) {
+        if (empty($_GET('logout'))) {
+            $_SESSION['facebook_access_token'] = '';
+        }
+        if (!empty($_SESSION['facebook_access_token'])) {
             $helper = $fb->getRedirectLoginHelper();
             try {
                 $accessToken = $helper->getAccessToken();
@@ -51,7 +54,7 @@ and open the template in the editor.
                 echo '<a href="' . $loginUrl . '"><img src="img/facebook.png" /></a>';
             } else {
                 // Logged in already!
-                //$_SESSION['facebook_access_token'] = (string) $accessToken;
+                $_SESSION['facebook_access_token'] = (string) $accessToken;
 
                 // Now you can redirect to another page and use the
                 // access token from $_SESSION['facebook_access_token']
