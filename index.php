@@ -72,7 +72,7 @@ and open the template in the editor.
                 $userNode = $response->getGraphUser();
 
                 $response = $fb->get('/me/friends?limit=5&offset=0');
-                $friendList = $response->getGraphEdge();
+                $friendNodeList = $response->getGraphEdge();
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
                 // When Graph returns an error
                 echo 'Graph returned an error: ' . $e->getMessage();
@@ -87,15 +87,13 @@ and open the template in the editor.
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
             var_dump($friendList);
-            $friendsOn = 0;
-            foreach ($friendList as $page) {
-                foreach ($page as $friend) {
-                    echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
-                    $friendsOn ++;
-                    //$response = $fb->get('/me?locale=en_US&fields=id,email,name,friends');
-                }
+            $friendList = array();
+            foreach ($friendNodeList as $friendNode) {
+                $friend = $friendNode->asArray();
+                echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
+                $friendList[] = $friend;
             }
-            echo '<br/>You have ' . $friendList->getTotalCount() . ' facebook friends but only ' . $friendsOn . ' of them are in the community. '
+            echo '<br/>You have ' . $friendList->getTotalCount() . ' facebook friends but only ' . count($friendList) . ' of them are in the community. '
             . 'Invite them to join you now. <br/>';
             ?>
 
@@ -113,18 +111,18 @@ and open the template in the editor.
                 putHouse_occupied(-490, -30);
 
     // put the houses
-                putHouse_fb(-260, 30);
-                putHouse_fb(-40, -110);
-                putHouse_fb(300, -20);
-            <?php
-            $friendsOn = 0;
-            foreach ($friendList as $page) {
-                $friend = $page->asArray();
-                echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
-                //$response = $fb->get('/me?locale=en_US&fields=id,email,name,friends');
-                $friendsOn ++;
-            }
-            ?>
+                //putHouse_fb(-260, 30);
+                //putHouse_fb(-40, -110);
+                //putHouse_fb(300, -20);
+    <?php
+    $locations = [[-260, 30],[-40, -110],[300, -20]];
+    for ($i=0; $i<count($friendList); $i++) {
+        $friend = $friendList[i];
+        $location = $locations[i];
+        echo "putHouse_fb(".$location[0].",".$location[1].",". $friend['id'].",".$friend['name'].")";
+    }
+
+    ?>
 
     // start animating
                 animate();
