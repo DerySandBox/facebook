@@ -88,6 +88,8 @@ and open the template in the editor.
             echo '<br/>Your email is: ' . $userNode->getEmail();
             echo '<br/>Your friends who also on this app are ';
 
+
+            
             // Only grab 5 pages
             $maxPages = 5;
             $pageCount = 0;
@@ -95,9 +97,11 @@ and open the template in the editor.
             do {
                 //echo '<h1>Page #' . $pageCount . ':</h1>' . "\n\n";
                 foreach ($friendList as $page) {
+                    var_dump($page);
                     var_dump($page->asArray());
+                    
 
-                    $likes = $page['items'];
+                    $likes = $page['likes'];
                     do {
                         echo '<p>Likes:</p>' . "\n\n";
                         var_dump($likes->asArray());
