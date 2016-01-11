@@ -48,8 +48,7 @@ and open the template in the editor.
             if (!isset($accessToken) || isset($_GET['logout'])) {
                 // Need to login first
                 echo '<h2>Initialize facebook accesstoken</h2>';
-                //$permissions = ['email','public_profile','user_friends','read_custom_friendlists']; 
-                $permissions = ['read_custom_friendlists'];
+                $permissions = ['email','user_friends']; 
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
                 //$loginUrl = $helper->getLoginUrl($redirect_url);
 
@@ -69,11 +68,11 @@ and open the template in the editor.
             $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 
             try {
-                $response = $fb->get('/me?locale=en_US&fields=id,email,name');
+                $response = $fb->get('/me?locale=en_US&fields=id,email,name,friends');
                 $userNode = $response->getGraphUser();
 
-                $friendList = $fb->get('/me/friendlists?limit=3&offset=0');
-                
+                $response = $fb->get('/me/friends?limit=5&offset=0');
+                $friendList = $response->getGraphEdge();
                 
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
                 // When Graph returns an error
@@ -88,8 +87,8 @@ and open the template in the editor.
             echo '<img src="//graph.facebook.com/' . $userNode->getId() . '/picture">';
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
-            echo '<br/>Your friend list is ';
-            var_dump($response);
+            echo '<br/>Your friends who also on this app are';
+            var_dump($friendList);
             ?>
 
             <script>
