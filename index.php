@@ -72,7 +72,7 @@ and open the template in the editor.
                 $userNode = $response->getGraphUser();
 
                 $response = $fb->get('/me/friends?limit=5&offset=0');
-                var_dump($response);
+                //var_dump($response);
                 $friendList = $response->getGraphEdge();
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
                 // When Graph returns an error
@@ -87,29 +87,14 @@ and open the template in the editor.
             echo '<img src="//graph.facebook.com/' . $userNode->getId() . '/picture">';
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
-            echo '<br/>Your friends who also on this app are ';
+            echo '<br/>You have ' . $friendList->getTotalCount() . ' friends on Facebook but below are also on this app <br/>';
 
 
-            
-            // Only grab 5 pages
-            $maxPages = 5;
-            $pageCount = 0;
-
-            do {
-                //echo '<h1>Page #' . $pageCount . ':</h1>' . "\n\n";
-                foreach ($friendList as $page) {
-                    var_dump($page);
-                    var_dump($page->asArray());
-                    
-
-                    $likes = $page['likes'];
-                    do {
-                        echo '<p>Likes:</p>' . "\n\n";
-                        var_dump($likes->asArray());
-                    } while ($likes = $fb->next($likes));
-                }
-                $pageCount++;
-            } while ($pageCount < $maxPages && $pagesEdge = $fb->next($pagesEdge));
+            foreach ($friendList as $page) {
+                $friend = $page->asArray();
+                var_dump($friend);
+                echo 'id='.$friend['id'].'  name='.$friend['name'];
+            }
             ?>
 
             <script>
