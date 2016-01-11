@@ -86,8 +86,7 @@ and open the template in the editor.
             echo '<img src="//graph.facebook.com/' . $userNode->getId() . '/picture">';
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
-            var_dump($friendList);
-            $friendList = array();
+
             foreach ($friendNodeList as $friendNode) {
                 $friend = $friendNode->asArray();
                 echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
