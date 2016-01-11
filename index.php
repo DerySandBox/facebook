@@ -86,7 +86,7 @@ and open the template in the editor.
             echo '<img src="//graph.facebook.com/' . $userNode->getId() . '/picture">';
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
-
+            var_dump($friendList);
             $friendsOn = 0;
             foreach ($friendList as $page) {
                 $friend = $page->asArray();
@@ -96,7 +96,7 @@ and open the template in the editor.
             }
             echo '<br/>You have ' . $friendList->getTotalCount() . ' facebook friends but only ' . $friendsOn . ' of them are in the community. '
             . 'Invite them to join you now. <br/>';
-    ?>
+            ?>
 
             <script>
                 var renderer = PIXI.autoDetectRenderer(1331, 548, {backgroundColor: 0x1099bb});
@@ -115,6 +115,15 @@ and open the template in the editor.
                 putHouse_fb(-260, 30);
                 putHouse_fb(-40, -110);
                 putHouse_fb(300, -20);
+            <?php
+            $friendsOn = 0;
+            foreach ($friendList as $page) {
+                $friend = $page->asArray();
+                echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
+                //$response = $fb->get('/me?locale=en_US&fields=id,email,name,friends');
+                $friendsOn ++;
+            }
+            ?>
 
     // start animating
                 animate();
@@ -127,9 +136,15 @@ and open the template in the editor.
                     stage.addChild(background);
                 }
 
-                function putHouse_fb(x, y) {
+                function putHouse_fb(x, y, id, name) {
                     // create a house container
                     var house = new PIXI.Sprite.fromImage('img/Layer.4.FB.png');
+
+                    // put on facebook pic
+                    var fb_feed = new PIXI.Sprite.fromImage('//graph.facebook.com/' + id + '/picture');
+                    fb_feed.position.x = 50;
+                    fb_feed.position.y = 50;
+                    house.addChild(fb_feed);
 
                     // put the feed to the house
                     var fb_feed = new PIXI.Sprite.fromImage('img/Layer.7.CloudB.png');
@@ -138,7 +153,7 @@ and open the template in the editor.
                     house.addChild(fb_feed);
 
                     // put the text to the feed
-                    var countingText = new PIXI.Text('Hey whats up!', {font: 'bold italic 12px Arvo', fill: 'red'});
+                    var countingText = new PIXI.Text(name, {font: 'bold italic 12px Arvo', fill: 'red'});
                     countingText.position.x = 660;
                     countingText.position.y = 195;
                     fb_feed.addChild(countingText);
