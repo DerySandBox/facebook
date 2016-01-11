@@ -122,7 +122,7 @@ and open the template in the editor.
         $location = $locations[$i];
         //var_dump($locations);
         //var_dump($location);
-        echo "putHouse_fb(".$location[0].",".$location[1].",". $friend['id'].",".$friend['name'].")";
+        echo "putHouse_fb(".$location[0].",".$location[1].",". $friend['id'].",'".$friend['name']."')";
     }
 
     ?>
