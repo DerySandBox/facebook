@@ -72,6 +72,7 @@ and open the template in the editor.
                 $userNode = $response->getGraphUser();
 
                 $response = $fb->get('/me/friends?limit=5&offset=0');
+                var_dump($response);
                 $friendList = $response->getGraphEdge();
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
                 // When Graph returns an error
