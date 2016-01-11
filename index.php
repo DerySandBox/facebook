@@ -87,9 +87,24 @@ and open the template in the editor.
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
             echo '<br/>Your friends who also on this app are ';
-            foreach ($friendList as $graphNode) {
-                var_dump($graphNode);
-            }
+
+            // Only grab 5 pages
+            $maxPages = 5;
+            $pageCount = 0;
+
+            do {
+                //echo '<h1>Page #' . $pageCount . ':</h1>' . "\n\n";
+                foreach ($friendList as $page) {
+                    var_dump($page->asArray());
+
+                    $likes = $page['items'];
+                    do {
+                        echo '<p>Likes:</p>' . "\n\n";
+                        var_dump($likes->asArray());
+                    } while ($likes = $fb->next($likes));
+                }
+                $pageCount++;
+            } while ($pageCount < $maxPages && $pagesEdge = $fb->next($pagesEdge));
             ?>
 
             <script>
@@ -170,8 +185,8 @@ and open the template in the editor.
 
             </script>        
 
-    <?php
-}
-?>        
+            <?php
+        }
+        ?>        
     </body>
 </html>
