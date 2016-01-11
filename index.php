@@ -145,8 +145,8 @@ and open the template in the editor.
                     // put on facebook pic
                     //var fb_feed = new PIXI.Sprite.fromImage('//graph.facebook.com/' + id + '/picture');
                     var fb_feed = new PIXI.Sprite.fromImage('img/zcIcon.jpg');
-                    fb_feed.position.x = 0;
-                    fb_feed.position.y = 0;
+                    fb_feed.position.x = 660;
+                    fb_feed.position.y = 300;
                     house.addChild(fb_feed);
 
                     // put the feed to the house
