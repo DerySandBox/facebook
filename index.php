@@ -48,7 +48,7 @@ and open the template in the editor.
             if (!isset($accessToken) || isset($_GET['logout'])) {
                 // Need to login first
                 echo '<h2>Initialize facebook accesstoken</h2>';
-                $permissions = ['email','user_friends']; 
+                $permissions = ['email', 'user_friends'];
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
                 //$loginUrl = $helper->getLoginUrl($redirect_url);
 
@@ -73,7 +73,6 @@ and open the template in the editor.
 
                 $response = $fb->get('/me/friends?limit=5&offset=0');
                 $friendList = $response->getGraphEdge();
-                
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
                 // When Graph returns an error
                 echo 'Graph returned an error: ' . $e->getMessage();
@@ -87,8 +86,10 @@ and open the template in the editor.
             echo '<img src="//graph.facebook.com/' . $userNode->getId() . '/picture">';
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
-            echo '<br/>Your friends who also on this app are';
-            var_dump($friendList);
+            echo '<br/>Your friends who also on this app are ';
+            foreach ($friendList as $graphNode) {
+                var_dump($graphNode);
+            }
             ?>
 
             <script>
@@ -169,8 +170,8 @@ and open the template in the editor.
 
             </script>        
 
-            <?php
-        }
-        ?>        
+    <?php
+}
+?>        
     </body>
 </html>
