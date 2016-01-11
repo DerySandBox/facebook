@@ -72,7 +72,6 @@ and open the template in the editor.
                 $userNode = $response->getGraphUser();
 
                 $response = $fb->get('/me/friends?limit=5&offset=0');
-                //var_dump($response);
                 $friendList = $response->getGraphEdge();
             } catch (Facebook\Exceptions\FacebookResponseException $e) {
                 // When Graph returns an error
@@ -91,11 +90,13 @@ and open the template in the editor.
             $friendsOn = 0;
             foreach ($friendList as $page) {
                 $friend = $page->asArray();
-                echo '<br/>id='.$friend['id'].'  name='.$friend['name'];
+                echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
+                //$response = $fb->get('/me?locale=en_US&fields=id,email,name,friends');
                 $friendsOn ++;
             }
-            echo '<br/>You have ' . $friendList->getTotalCount() . ' facebook friends but only '.$friendsOn.' of them are on this app. Invite them now. <br/>';
-            ?>
+            echo '<br/>You have ' . $friendList->getTotalCount() . ' facebook friends but only ' . $friendsOn . ' of them are in the community. '
+            . 'Invite them to join you now. <br/>';
+    ?>
 
             <script>
                 var renderer = PIXI.autoDetectRenderer(1331, 548, {backgroundColor: 0x1099bb});
