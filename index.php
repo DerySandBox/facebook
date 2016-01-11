@@ -116,12 +116,12 @@ and open the template in the editor.
     <?php
     $locations = [[-260, 30],[-40, -110],[300, -20]];
     for ($i=0; $i<count($friendList); $i++) {
-        $friend = $friendList[i];
-        var_dump($friendList);
-        var_dump($friend);
-        $location = $locations[i];
-        var_dump($locations);
-        var_dump($location);
+        $friend = $friendList[$i];
+        //var_dump($friendList);
+        //var_dump($friend);
+        $location = $locations[$i];
+        //var_dump($locations);
+        //var_dump($location);
         echo "putHouse_fb(".$location[0].",".$location[1].",". $friend['id'].",".$friend['name'].")";
     }
 
