@@ -89,7 +89,7 @@ and open the template in the editor.
 
             foreach ($friendNodeList as $friendNode) {
                 $friend = $friendNode->asArray();
-                echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
+                //echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
                 $friendList[] = $friend;
             }
             echo '<br/>You have ' . $friendNodeList->getTotalCount() . ' facebook friends but only ' . count($friendList) . ' of them are in the community. '
@@ -143,9 +143,10 @@ and open the template in the editor.
                     var house = new PIXI.Sprite.fromImage('img/Layer.4.FB.png');
 
                     // put on facebook pic
-                    var fb_feed = new PIXI.Sprite.fromImage('//graph.facebook.com/' + id + '/picture');
-                    fb_feed.position.x = 50;
-                    fb_feed.position.y = 50;
+                    //var fb_feed = new PIXI.Sprite.fromImage('//graph.facebook.com/' + id + '/picture');
+                    var fb_feed = new PIXI.Sprite.fromImage('img/zcIcon.jpg');
+                    fb_feed.position.x = 0;
+                    fb_feed.position.y = 0;
                     house.addChild(fb_feed);
 
                     // put the feed to the house
