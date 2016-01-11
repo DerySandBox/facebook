@@ -89,10 +89,11 @@ and open the template in the editor.
             var_dump($friendList);
             $friendsOn = 0;
             foreach ($friendList as $page) {
-                $friend = $page->asArray();
-                echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
-                //$response = $fb->get('/me?locale=en_US&fields=id,email,name,friends');
-                $friendsOn ++;
+                foreach ($page as $friend) {
+                    echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
+                    $friendsOn ++;
+                    //$response = $fb->get('/me?locale=en_US&fields=id,email,name,friends');
+                }
             }
             echo '<br/>You have ' . $friendList->getTotalCount() . ' facebook friends but only ' . $friendsOn . ' of them are in the community. '
             . 'Invite them to join you now. <br/>';
