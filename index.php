@@ -92,7 +92,7 @@ and open the template in the editor.
                 echo '<br/>id=' . $friend['id'] . '  name=' . $friend['name'];
                 $friendList[] = $friend;
             }
-            echo '<br/>You have ' . $friendList->getTotalCount() . ' facebook friends but only ' . count($friendList) . ' of them are in the community. '
+            echo '<br/>You have ' . $friendNodeList->getTotalCount() . ' facebook friends but only ' . count($friendList) . ' of them are in the community. '
             . 'Invite them to join you now. <br/>';
             ?>
 
