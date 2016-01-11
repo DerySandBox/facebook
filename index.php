@@ -48,7 +48,7 @@ and open the template in the editor.
             if (!isset($accessToken) || isset($_GET['logout'])) {
                 // Need to login first
                 echo '<h2>Initialize facebook accesstoken</h2>';
-                $permissions = ['read_custom_friendlists']; // optional
+                $permissions = ['email','public_profile','user_friends','read_custom_friendlists']; // optional
                 $loginUrl = $helper->getLoginUrl($redirect_url, $permissions);
                 //$loginUrl = $helper->getLoginUrl($redirect_url);
 
