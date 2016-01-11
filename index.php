@@ -87,14 +87,14 @@ and open the template in the editor.
             echo '<img src="//graph.facebook.com/' . $userNode->getId() . '/picture">';
             echo '<br/>Thank you so much for your visit: ' . $userNode->getName();
             echo '<br/>Your email is: ' . $userNode->getEmail();
-            echo '<br/>You have ' . $friendList->getTotalCount() . ' friends on Facebook but below are also on this app <br/>';
 
-
+            $friendsOn = 0;
             foreach ($friendList as $page) {
                 $friend = $page->asArray();
-                var_dump($friend);
-                echo 'id='.$friend['id'].'  name='.$friend['name'];
+                echo '<br/>id='.$friend['id'].'  name='.$friend['name'];
+                $friendsOn ++;
             }
+            echo '<br/>You have ' . $friendList->getTotalCount() . ' facebook friends but only '.$friendsOn.' of them are on this app. Invite them now. <br/>';
             ?>
 
             <script>
